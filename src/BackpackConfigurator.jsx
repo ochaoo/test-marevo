@@ -57,8 +57,8 @@ const BackpackConfigurator = () => {
             </div>
           </div>
         ) : (
-          <XR store={xrStore} sessionInit={{ optionalFeatures: ["local-floor", "bounded-floor"] }}>
-            <Canvas camera={{ position: [0, 0, 3] }}>
+          <Canvas camera={{ position: [0, 0, 3] }}>
+            <XR store={xrStore} sessionInit={{ optionalFeatures: ["local-floor", "bounded-floor"] }}>
               <OrbitControls />
               <Environment preset="apartment" />
 
@@ -66,8 +66,8 @@ const BackpackConfigurator = () => {
               <ambientLight intensity={0.8} />
 
               <BackpackModel metalColor={metal} bodyColor={color} materialType={material} />
-            </Canvas>
-          </XR>
+            </XR>
+          </Canvas>
         )}
       </div>
 
