@@ -15,7 +15,6 @@ const BackpackConfigurator = () => {
   const [material, setMaterial] = useState("leather");
   const [showQR, setShowQR] = useState(false);
 
-  const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const isAndroid = /Android/i.test(navigator.userAgent);
 
@@ -33,7 +32,7 @@ const BackpackConfigurator = () => {
     <div>
       <div className="flex justify-center pt-[35px] font-medium text-sm text-white">
         <button
-          onClick={() => setShowQR(!showQR)}
+          onClick={openAR}
           className="w-[156px] h-10 flex justify-center items-center gap-2.5 bg-[#4169E1] rounded-4xl hover:cursor-pointer hover:bg-[#758fdd]"
         >
           <img src={Icon} /> See In Real Life
