@@ -21,9 +21,9 @@ const BackpackConfigurator = () => {
 
   const openAR = () => {
     if (isIOS) {
-      window.location.href = "https://your-domain.com//models/backpack-transformed.usdz";
+      window.location.href = "https://test-marevo-three.vercel.app/models/backpack-transformed.usdz";
     } else if (isAndroid) {
-      window.location.href = `intent://arvr.google.com/scene-viewer/1.0?file=https://your-domain.com/models/backpack-transformed.glb&mode=ar_only#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;`;
+      window.location.href = `intent://arvr.google.com/scene-viewer/1.0?file=https://test-marevo-three.vercel.app/models/backpack-transformed.glb&mode=ar_only#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;`;
     } else {
       setShowQR(true);
     }
