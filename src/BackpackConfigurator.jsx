@@ -15,24 +15,13 @@ const BackpackConfigurator = () => {
   const [material, setMaterial] = useState("leather");
   const [showQR, setShowQR] = useState(false);
 
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const isAndroid = /Android/i.test(navigator.userAgent);
-
-  const openAR = () => {
-    if (isIOS) {
-      window.location.href = "https://test-marevo-three.vercel.app/models/backpack-transformed.usdz";
-    } else if (isAndroid) {
-      window.location.href = `intent://arvr.google.com/scene-viewer/1.0?file=https://test-marevo-three.vercel.app/models/backpack-transformed.glb&mode=ar_only#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;`;
-    } else {
-      setShowQR(true);
-    }
-  };
+  const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
 
   return (
     <div>
       <div className="flex justify-center pt-[35px] font-medium text-sm text-white">
         <button
-          onClick={openAR}
+          onClick={() => setShowQR(!showQR)}
           className="w-[156px] h-10 flex justify-center items-center gap-2.5 bg-[#4169E1] rounded-4xl hover:cursor-pointer hover:bg-[#758fdd]"
         >
           <img src={Icon} /> See In Real Life
@@ -41,22 +30,33 @@ const BackpackConfigurator = () => {
 
       <div className="w-screen h-[60vh] flex justify-center items-center">
         {showQR ? (
-          <div className="w-[305px] h-[400px] border-[1px] rounded-4xl border-[#4169E1] flex flex-col items-center text-[#4169E1] pt-[16px]">
-            <button className="hover:cursor-pointer self-end mr-5" onClick={() => setShowQR(!showQR)}>
-              X
-            </button>
-            <span className="w-[225px] mb-[30px] border-b-[1px] border-[#4169E1] pb-1 text-center text-lg">
-              Scan the QR code with your phone. Within 1-3 seconds the AR function opens on your phone.
-            </span>
-            <div className="w-[190px] h-[190px] border-[1px] rounded-4xl border-[#4169E1] flex justify-center items-center">
-              <QRCodeSVG
-                value="https://test-marevo-three.vercel.app/"
-                size={128}
-                fgColor="#4169E1"
-                bgColor="transparent"
-              />
+          isMobile ? (
+            <model-viewer
+              src="https://test-marevo-three.vercel.app/models/backpack-transformed.glb"
+              ios-src="https://test-marevo-three.vercel.app/models/backpack-transformed.usdz"
+              ar
+              ar-modes="webxr scene-viewer quick-look"
+              camera-controls
+              style={{ width: "100%", height: "500px" }}
+            />
+          ) : (
+            <div className="w-[305px] h-[400px] border-[1px] rounded-4xl border-[#4169E1] flex flex-col items-center text-[#4169E1] pt-[16px]">
+              <button className="hover:cursor-pointer self-end mr-5" onClick={() => setShowQR(!showQR)}>
+                X
+              </button>
+              <span className="w-[225px] mb-[30px] border-b-[1px] border-[#4169E1] pb-1 text-center text-lg">
+                Scan the QR code with your phone. Within 1-3 seconds the AR function opens on your phone.
+              </span>
+              <div className="w-[190px] h-[190px] border-[1px] rounded-4xl border-[#4169E1] flex justify-center items-center">
+                <QRCodeSVG
+                  value="https://test-marevo-three.vercel.app/"
+                  size={128}
+                  fgColor="#4169E1"
+                  bgColor="transparent"
+                />
+              </div>
             </div>
-          </div>
+          )
         ) : (
           <Canvas camera={{ position: [0, 0, 3] }}>
             <OrbitControls />
