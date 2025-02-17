@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
+import { ARButton, XR, Controllers, Hands } from "@react-three/xr";
 import { QRCodeSVG } from "qrcode.react";
 import BackpackModel from "./components/models/BackPackModel";
 import Icon from "/button_icon.svg?url";
 
-const materials = ["denim", "fabric", "leather"];
 const colors = ["#8B4512", "black", "blue"];
 const metals = ["silver", "black", "gold"];
 
@@ -31,14 +31,18 @@ const BackpackConfigurator = () => {
       <div className="w-screen h-[60vh] flex justify-center items-center">
         {showQR ? (
           isMobile ? (
-            <model-viewer
-              src="https://test-marevo-three.vercel.app/models/backpack-transformed.glb"
-              ios-src="https://test-marevo-three.vercel.app/models/backpack-transformed.usdz"
-              ar
-              ar-modes="webxr scene-viewer quick-look"
-              camera-controls
-              style={{ width: "100%", height: "500px" }}
-            />
+            <div className="w-full h-full flex flex-col items-center">
+              <ARButton sessionInit={{ requiredFeatures: ["hit-test"] }} />
+              <Canvas>
+                <XR>
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[0, 5, 5]} intensity={1} />
+                  <BackpackModel position={[0, 0, -2]} metalColor={metal} bodyColor={color} materialType={material} />
+                  <Controllers />
+                  <Hands />
+                </XR>
+              </Canvas>
+            </div>
           ) : (
             <div className="w-[305px] h-[400px] border-[1px] rounded-4xl border-[#4169E1] flex flex-col items-center text-[#4169E1] pt-[16px]">
               <button className="hover:cursor-pointer self-end mr-5" onClick={() => setShowQR(!showQR)}>

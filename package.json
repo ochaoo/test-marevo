@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-three/drei": "^9.121.5",
     "@react-three/fiber": "^8.17.14",
+    "@react-three/xr": "^6.6.5",
     "@tailwindcss/vite": "^4.0.6",
     "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
