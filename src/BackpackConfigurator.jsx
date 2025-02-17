@@ -50,7 +50,12 @@ const BackpackConfigurator = () => {
               Scan the QR code with your phone. Within 1-3 seconds the AR function opens on your phone.
             </span>
             <div className="w-[190px] h-[190px] border-[1px] rounded-4xl border-[#4169E1] flex justify-center items-center">
-              <QRCodeSVG value="https://your-ar-link.com" size={128} fgColor="#4169E1" bgColor="transparent" />
+              <QRCodeSVG
+                value="https://test-marevo-three.vercel.app/"
+                size={128}
+                fgColor="#4169E1"
+                bgColor="transparent"
+              />
             </div>
           </div>
         ) : (
